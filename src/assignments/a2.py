@@ -15,6 +15,30 @@ def bubble_sort(l, step):
                     print(l)
     print("Sorted list: " + str(l))
 
+
+def next_gap(gap):
+    gap = int(gap*10/13)
+    if gap < 1:
+        gap = 1
+    return gap
+
+
+def comb_sort(l, step):
+    print("Comb sort method:")
+    count = 0
+    gap = len(l)
+    ok = False
+    while gap != 1 or ok is False:
+        gap = next_gap(gap)
+        ok = True
+        for i in range(0, len(l)-gap):
+            if l[i] > l[i+gap]:
+                l[i], l[i+gap] = l[i+gap], l[i]
+                count += 1
+                if count % step == 0:
+                    print("Step " + str(count) + ": " + str(l))
+    print("Sorted list: " + str(l))
+
 print("Generate a list of `n` random natural numbers. Generated numbers must be between `0` and `100`.")
 
 """
@@ -24,12 +48,13 @@ n = int(input("n="))
 lst = []
 for i in range(0, n):
     lst.append(int(input("element " + str(i + 1) + ": ")))
+
 """
 The algorithm makes a copy of the list to use for the first sort, reads the step number for the first sorting algorithm,
 sorts the list copy using the first sorting algorithm and at the same time prints the partially sorted list after every 
 'step' swaps, after that it prints the final sorted list.
 """
-lst1 = lst
+lst1 =list(lst)
 print("The first sorting method is bubble sort! ", end="")
 step = int(input("Insert bubble sort step: "))
 bubble_sort(lst1, step)
